@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+// import Products from './components/LoginView';
+import Nav from './components/Navbar';
+import 'antd/dist/antd.css';
+import {connect} from 'react-redux';
+import {LoggedIn} from './actions/LoginSignup';
+import {Route,Switch,BrowserRouter as Router} from 'react-router-dom';
+import createDriverForm from "./components/createDriverForm";
 class App extends Component {
+  componentDidMount() {
+    console.log('AAAAAAAAAA', this.props.user);
+    if (this.props.user) {
+      this.props.dispatch(LoggedIn(this.props.user));
+    }
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <div>
+          <Nav/>
+          <Switch>
+            <Route exact path='/' component={createDriverForm}/>
+            {/*<ProtectedRoute exact path='/checkout' component={Checkout} user={this.props.user}/>*/}
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
-
-export default App;
+const mapStateToProps = (state)=>{
+  return {
+    user:state.user
+  };
+}
+export default connect(mapStateToProps)(App);
