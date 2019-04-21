@@ -27,7 +27,7 @@ class App extends Component {
             {this.props.user==="" && <Route exact path ='/' render={()=>(
               <div style={{textAlign:'center'}}>
                 <Avatar style={{marginTop:'40px'}} size={200} src={require('./icons/admin.png')}/>
-                <Carousel effect="fade">
+                <Carousel effect="fade" autoplay>
                   <div><h1>MEDICARE</h1></div>
                   <div><h1>ADMIN</h1></div>
                   <div><h1>PANEL</h1></div>
