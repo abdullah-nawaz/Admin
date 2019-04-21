@@ -19,13 +19,15 @@ class Nav extends React.Component {
   render() {
     return (
       <Header>
-        <div style={{width: '120px',height: '31px',background: 'rgba(255,255,255,.2)',margin: '16px 24px 16px 0',float: 'left'}} />
+        <Link to='/' style={{width: '120px',background: 'rgba(255,255,255,.2)',marginRight: '44px',float: 'left'}} ><strong>Medicare Admin</strong></Link>
         <Menu
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={['2']}
           style={{ lineHeight: '64px' }}
         >
+          <Menu.Item>{this.props.user!==''&&<Link to='/'>Drivers List</Link>}</Menu.Item>
+          <Menu.Item>{this.props.user!==''&&<Link to='/addDriver'>Add Driver</Link>}</Menu.Item>
           {this.props.user==''||this.props.user=='user not found'?<Login/>:''}
           {this.props.user!=''&&this.props.user!='user not found'?<Logout/>:''}
 

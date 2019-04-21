@@ -13,8 +13,8 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 const initialState={};
 
 let middleware=[thunk];
-const loggerMiddleware = require('redux-logger');
-middleware = [ ...middleware, loggerMiddleware.createLogger()];
+// const loggerMiddleware = require('redux-logger');
+// middleware = [ ...middleware, loggerMiddleware.createLogger()];
 
 export const store  = createStore(persistedReducer,
   initialState,

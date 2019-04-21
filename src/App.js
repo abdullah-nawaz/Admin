@@ -5,6 +5,8 @@ import 'antd/dist/antd.css';
 import {connect} from 'react-redux';
 import {LoggedIn} from './actions/LoginSignup';
 import {Route,Switch,BrowserRouter as Router} from 'react-router-dom';
+import {ProtectedRoute} from  './components/ProtectedRoute/ProtectedRoute'
+import driversList from './components/driversList'
 import createDriverForm from "./components/createDriverForm";
 class App extends Component {
   componentDidMount() {
@@ -19,8 +21,9 @@ class App extends Component {
         <div>
           <Nav/>
           <Switch>
-            <Route exact path='/' component={createDriverForm}/>
-            {/*<ProtectedRoute exact path='/checkout' component={Checkout} user={this.props.user}/>*/}
+            {this.props.user==="" && <Route exact path ='/' render={()=><div> </div>} />}
+            <ProtectedRoute exact path='/' component={driversList} user={this.props.user}/>
+            <ProtectedRoute exact path='/addDriver' component={createDriverForm} user={this.props.user}/>
           </Switch>
         </div>
       </Router>

@@ -1,6 +1,7 @@
 import { Tooltip,Icon,Radio,Button,Input,Form, Typography } from 'antd';
 import React from 'react';
 import {connect} from 'react-redux';
+import {addDriver} from '../actions/DriverActions';
 
 class createDriverForm extends React.Component {
 
@@ -9,6 +10,7 @@ class createDriverForm extends React.Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log(values);
+        this.props.dispatch(addDriver(values));
       }
     });
   };
@@ -95,7 +97,7 @@ class createDriverForm extends React.Component {
             </span>
             )}
           >
-            {getFieldDecorator('licpl', {
+            {getFieldDecorator('license-plate-number', {
               rules: [{ required: true, message: 'Please input driver Licence plate number!', whitespace: true }],
             })(
               <Input />
@@ -124,8 +126,9 @@ class createDriverForm extends React.Component {
           >
             {getFieldDecorator('phone', {
               rules: [{ required: true, message: 'Please input your phone number!' }],
+              initialValue: '+92'
             })(
-              <Input addonBefore={'03'} style={{ width: '100%' }} />
+              <Input addonBefore={'+92'} style={{ width: '100%' }} />
             )}
           </Form.Item>
 
